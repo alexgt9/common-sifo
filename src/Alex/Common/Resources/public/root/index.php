@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
  * All PHP requests should be directed to this file via Apache using mod_rewrite or mod_alias or .htaccess (not really efficient).
  */
 // Get the path to the root folder. ( 4 folders up from the current file):
-$root = realpath( __DIR__ . '/../../..' );
+$root = realpath( __DIR__ . '/../../../..' );
 
 // Instance name (folder under instances):
 $instance = 'Common';

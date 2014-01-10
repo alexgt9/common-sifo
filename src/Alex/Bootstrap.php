@@ -19,7 +19,7 @@
  *
  */
 
-namespace{ require __DIR__ . "/../vendor/autoload.php"; }
+namespace{ require __DIR__ . "/../../vendor/autoload.php"; }
 
 namespace Sifo
 {

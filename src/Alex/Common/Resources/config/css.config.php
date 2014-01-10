@@ -3,7 +3,7 @@
 $config['default'] = array(
 	'media' => 'screen',
 	'files' => array(
-		'Common/public/static/css/bootstrap.css'
+		'Common/Resources/public/static/css/bootstrap.css'
 	)
 );
 
