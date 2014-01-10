@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "d640a3e1a78a2a8b3e60ffda556665c0",
+    "hash": "2642acaa6b9ed13143bc37da3a7c13cc",
     "packages": [
         {
             "name": "alexgt9/sifo-composer",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alexgt9/sifo-composer.git",
-                "reference": "137910860b5611323b986993b3410a493432e999"
+                "reference": "68062e45996e513cc37f819b4398eead579ab47d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alexgt9/sifo-composer/zipball/137910860b5611323b986993b3410a493432e999",
-                "reference": "137910860b5611323b986993b3410a493432e999",
+                "url": "https://api.github.com/repos/alexgt9/sifo-composer/zipball/68062e45996e513cc37f819b4398eead579ab47d",
+                "reference": "68062e45996e513cc37f819b4398eead579ab47d",
                 "shasum": ""
             },
             "require": {
@@ -26,7 +26,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Sifophp\\Sifo\\": "src/Sifo"
+                    "Sifo\\": "src/Sifo"
                 }
             },
             "authors": [
@@ -42,7 +42,47 @@
                 "source": "https://github.com/alexgt9/sifo-composer/tree/master",
                 "issues": "https://github.com/alexgt9/sifo-composer/issues"
             },
-            "time": "2014-01-09 17:24:01"
+            "time": "2014-01-10 18:43:53"
+        },
+        {
+            "name": "alexgt9/sifo-smarty-plugins",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alexgt9/sifo-smarty-plugins.git",
+                "reference": "4fd14accee80b540298b98cd7d4242b4c63ac749"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/alexgt9/sifo-smarty-plugins/zipball/4fd14accee80b540298b98cd7d4242b4c63ac749",
+                "reference": "4fd14accee80b540298b98cd7d4242b4c63ac749",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "license": [
+                "Apache-1.0"
+            ],
+            "authors": [
+                {
+                    "name": "Alex",
+                    "email": "alexgt9@gmail.com",
+                    "homepage": "http://sifo.me"
+                }
+            ],
+            "description": "SIFO Smarty Plugins",
+            "homepage": "https://github.com/alexgt9/sifo-smarty-plugins",
+            "keywords": [
+                "plugins",
+                "smarty"
+            ],
+            "support": {
+                "source": "https://github.com/alexgt9/sifo-smarty-plugins/tree/v1.0.0",
+                "issues": "https://github.com/alexgt9/sifo-smarty-plugins/issues"
+            },
+            "time": "2014-01-10 18:32:14"
         },
         {
             "name": "phpunit/php-code-coverage",
