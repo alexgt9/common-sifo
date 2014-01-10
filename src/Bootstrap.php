@@ -19,17 +19,15 @@
  *
  */
 
-namespace Sifo;
+namespace{ require __DIR__ . "/../vendor/autoload.php"; }
+
+namespace Sifo
+{
 
 if ( extension_loaded( 'newrelic' ) && isset( $instance ) )
 {
 	newrelic_set_appname( ucfirst( $instance ) );
 }
-
-/**
- * Class Bootstrap
- */
-require_once ROOT_PATH . '/libs/Sifo/Config.php';
 
 class Bootstrap
 {
@@ -69,33 +67,6 @@ class Bootstrap
 	public static $controller = null;
 
 	/**
-	 * This classes will be loaded in this order and ALWAYS before starting
-	 * to parse code. This array can be replaced in your libraries.config under
-	 * the key $config['classes_always_preloaded']
-	 *
-	 * @var array
-	 */
-	public static $required_classes = array(
-		'Exceptions',
-		'Filter',
-		'Domains',
-		'Urls',
-		'Router',
-		'Controller'
-	);
-
-	/**
-	 * Include the minimum necessary files to run SIFO.
-	 */
-	public static function includeRequiredFiles()
-	{
-		foreach ( self::$required_classes as $class )
-		{
-			self::includeFile( $class );
-		}
-	}
-
-	/**
 	 * Starts the execution. Root path is passed to avoid recalculation.
 	 *
 	 * @param $instance_name
@@ -111,29 +82,11 @@ class Bootstrap
 		self::$application = dirname( __FILE__ );
 		self::$instance    = $instance_name;
 
-		// Include files:
-		self::includeRequiredFiles();
-
-		self::autoload();
 		Benchmark::getInstance()->timingStart();
 
 		self::dispatch( $controller_name );
 
 		Benchmark::getInstance()->timingStop();
-	}
-
-	/**
-	 * Registers the autoload used by Sifo.
-	 *
-	 * @static
-	 */
-	public static function autoload()
-	{
-		// Register autoloader:
-		return spl_autoload_register( array(
-		                                   '\\Sifo\Bootstrap',
-		                                   'includeFile'
-		                              ) );
 	}
 
 	/**
@@ -145,17 +98,9 @@ class Bootstrap
 	 */
 	public static function invokeController( $controller )
 	{
-		$controller_path = explode( '/', $controller );
+		$class_name = self::getRealClassName( $controller );
 
-		$class = '';
-		foreach ( $controller_path as $part )
-		{
-			$class .= ucfirst( $part );
-		}
-
-		$class .= 'Controller';
-
-		return self::getClass( $class );
+		return self::getClass( $class_name );
 	}
 
 	/**
@@ -169,7 +114,7 @@ class Bootstrap
 	 * @throws Exception_500
 	 * @return string The classname you asked for.
 	 */
-	public static function includeFile( $classname )
+	public static function getRealClassName( $classname )
 	{
 		try
 		{
@@ -180,12 +125,7 @@ class Bootstrap
 			throw new Exception_500( $e->getMessage() );
 		}
 
-		if ( !include_once ROOT_PATH . DIRECTORY_SEPARATOR . $classInfo['path'] )
-		{
-			throw new Exception_500( "Doesn't exist in expected path {$classInfo['path']}" );
-		}
-
-		return $classInfo['name'];
+		return $classInfo['path'];
 	}
 
 	/**
@@ -199,20 +139,18 @@ class Bootstrap
 	 * @throws Exception_500
 	 * @return Object|void
 	 */
-	public static function getClass( $class, $call_constructor = true )
+	public static function getClass( $class_name, $call_constructor = true )
 	{
-		$classname = self::includeFile( $class );
-
-		if ( class_exists( $classname ) )
+		if ( class_exists( $class_name ) )
 		{
 			if ( $call_constructor )
 			{
-				return new $classname;
+				return new $class_name;
 			}
 		}
 		else
 		{
-			throw new Exception_500( "Method getClass($class) failed because the class $classname is not declared inside this file (a copy/paste friend?)." );
+			throw new Exception_500( "Method getClass($class_name) failed because the class $class_name is not declared inside this file (a copy/paste friend?)." );
 		}
 	}
 
@@ -294,7 +232,6 @@ class Bootstrap
 					system( 'rm -rf ' . $smarty_compiles_dir );
 				}
 
-				$ctrl->getClass( 'Cookie' );
 				if ( FilterGet::getInstance()->getInteger( 'rebuild_all' ) )
 				{
 					Cookie::set( 'rebuild_all', 1 );
@@ -439,4 +376,6 @@ class Bootstrap
 			ini_set( $varname, $newvalue );
 		}
 	}
+}
+
 }

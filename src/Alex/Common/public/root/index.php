@@ -1,0 +1,23 @@
+<?php
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+/**
+ * Point of entry for this instance. Apache points to this file.
+ *
+ * All PHP requests should be directed to this file via Apache using mod_rewrite or mod_alias or .htaccess (not really efficient).
+ */
+// Get the path to the root folder. ( 4 folders up from the current file):
+$root = realpath( __DIR__ . '/../../..' );
+
+// Instance name (folder under instances):
+$instance = 'Common';
+
+// Define the root path:
+define( 'ROOT_PATH', $root );
+
+require ROOT_PATH . '/Bootstrap.php';
+
+// Execute your instance:
+Sifo\Bootstrap::execute( $instance );

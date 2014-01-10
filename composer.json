@@ -1,6 +1,7 @@
 {
         "name": "alexgt9/common-sifo",
         "description": "Common with SIFO",
+        "license": "proprietary",
         "keywords": [],
         "homepage": "https://github.com/alexgt9/common-sifo",
         "type": "library",
@@ -15,14 +16,21 @@
 		   {
 		     "type": "vcs",
 		     "url": "https://github.com/alexgt9/sifo-composer"
-		   }
+		   },
+                   {
+                     "type": "vcs",
+                     "url": "https://github.com/alexgt9/sifo-smarty-plugins"
+                   }
 		],
         "require": {
                 "php": ">=5.3.2",
                 "phpunit/phpunit": "3.7.28",
-                "alexgt9/sifo-composer"
+                "alexgt9/sifo-composer": "1.0.*",
+                "alexgt9/sifo-smarty-plugins": "1.0.*",
+                "smarty/smarty": "3.1.*"
         },
         "autoload": {
-                "psr-4": { "Alex\\": "src/" }
-        }
+                "psr-4": { "Alex\\": "src/Alex/" }
+        },
+        "minimum-stability": "dev"
 }
